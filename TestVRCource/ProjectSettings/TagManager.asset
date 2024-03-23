@@ -10,6 +10,7 @@ TagManager:
   - OnePoint
   - TwoPoint
   - ThreePoint
+  - MovePoint
   layers:
   - Default
   - TransparentFX
