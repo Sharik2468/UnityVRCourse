@@ -7,12 +7,14 @@ public class EnemyAI : MonoBehaviour
 {
     [Header("EnemySettings")]
     public NavMeshAgent agent; // Для управления перемещением AI
+    public StatComponent characterStats;
     public Transform player; // Позиция игрока
     public List<Transform> points; // Точки для патрулирования
     private int destPoint = 0; // Текущая цель патрулирования
     public float chaseRange = 10f; // Дистанция обнаружения игрока
     public float patrolSpeed = 3.5f; // Скорость при патрулировании
     public float chaseSpeed = 7f; // Скорость при преследовании
+    public float EnemyDamage = 5.0f;
 
     [Header("AnimSettings")]
     public Animator animator; // Подключи свой Animator здесь
@@ -119,6 +121,7 @@ public class EnemyAI : MonoBehaviour
             // Код, который выполняется при ударе игрока
             // Например:
             // player.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
+            characterStats.TakeDamage(EnemyDamage);
         }
     }
 

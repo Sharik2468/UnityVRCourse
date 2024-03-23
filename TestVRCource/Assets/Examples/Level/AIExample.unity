@@ -615,6 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1289112824}
+  characterStats: {fileID: 0}
   player: {fileID: 574803186}
   points:
   - {fileID: 1074440364}
@@ -630,6 +631,16 @@ MonoBehaviour:
   chaseSpeed: 3
   animator: {fileID: 1289112826}
   attackRange: 1.5
+  FindMovePoints: 0
+  DelayForFindingPoints: 0
+  audioSource: {fileID: 0}
+  patrolSounds: []
+  chaseSounds: []
+  attackSounds: []
+  soundDelay: 5
+  bgAudioSource: {fileID: 0}
+  bgPatrolSounds: {fileID: 0}
+  bgChaseSounds: {fileID: 0}
 --- !u!195 &1289112824
 NavMeshAgent:
   m_ObjectHideFlags: 0
