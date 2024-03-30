@@ -14,48 +14,48 @@ public class MazeSpawner : MonoBehaviour
 
     #region VariableSeciton
 
-    // Делегат для события Перестройки уровня
+    // Р”РµР»РµРіР°С‚ РґР»СЏ СЃРѕР±С‹С‚РёСЏ РџРµСЂРµСЃС‚СЂРѕР№РєРё СѓСЂРѕРІРЅСЏ
     public delegate void RestartCompletedEventHandler();
 
-    // Событие, которое вызывается, когда действие завершено
+    // РЎРѕР±С‹С‚РёРµ, РєРѕС‚РѕСЂРѕРµ РІС‹Р·С‹РІР°РµС‚СЃСЏ, РєРѕРіРґР° РґРµР№СЃС‚РІРёРµ Р·Р°РІРµСЂС€РµРЅРѕ
     public event RestartCompletedEventHandler OnRestartCompleted;
     #endregion
 
     /// <summary>
-    /// Настройка персонажа
+    /// РќР°СЃС‚СЂРѕР№РєР° РїРµСЂСЃРѕРЅР°Р¶Р°
     /// </summary>
     public SpawnItem Character;
     /// <summary>
-    /// Настройка выхода
+    /// РќР°СЃС‚СЂРѕР№РєР° РІС‹С…РѕРґР°
     /// </summary>
     public SpawnItem Exit;
 
     /// <summary>
-    /// Левая верхняя вершина прямогольника, в котором может спавниться лабиринт
+    /// Р›РµРІР°СЏ РІРµСЂС…РЅСЏСЏ РІРµСЂС€РёРЅР° РїСЂСЏРјРѕРіРѕР»СЊРЅРёРєР°, РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ СЃРїР°РІРЅРёС‚СЊСЃСЏ Р»Р°Р±РёСЂРёРЅС‚
     /// </summary>
     [Header("GridSettings")]
-    // Вершины прямоугольника
+    // Р’РµСЂС€РёРЅС‹ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР°
     public Vector3 topLeft;
     /// <summary>
-    /// Правая нижняя вершина прямоугольника, в котором может спавниться лабиринт
+    /// РџСЂР°РІР°СЏ РЅРёР¶РЅСЏСЏ РІРµСЂС€РёРЅР° РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР°, РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ СЃРїР°РІРЅРёС‚СЊСЃСЏ Р»Р°Р±РёСЂРёРЅС‚
     /// </summary>
     public Vector3 bottomRight;
 
     /// <summary>
-    /// Сложность лабиринта
+    /// РЎР»РѕР¶РЅРѕСЃС‚СЊ Р»Р°Р±РёСЂРёРЅС‚Р°
     /// </summary>
     [Header("DifficultSettings")]
     public DifficultType Difficult;
     /// <summary>
-    /// Настройка лёгкой сложности
+    /// РќР°СЃС‚СЂРѕР№РєР° Р»С‘РіРєРѕР№ СЃР»РѕР¶РЅРѕСЃС‚Рё
     /// </summary>
     public DifficultStruct easyDifficulty;
     /// <summary>
-    /// Настройка средней сложности лабиринта
+    /// РќР°СЃС‚СЂРѕР№РєР° СЃСЂРµРґРЅРµР№ СЃР»РѕР¶РЅРѕСЃС‚Рё Р»Р°Р±РёСЂРёРЅС‚Р°
     /// </summary>
     public DifficultStruct normalDifficulty;
     /// <summary>
-    /// Настройка сложной сложности лабиринта
+    /// РќР°СЃС‚СЂРѕР№РєР° СЃР»РѕР¶РЅРѕР№ СЃР»РѕР¶РЅРѕСЃС‚Рё Р»Р°Р±РёСЂРёРЅС‚Р°
     /// </summary>
     public DifficultStruct hardDifficulty;
 
@@ -63,52 +63,52 @@ public class MazeSpawner : MonoBehaviour
     public SpawnItem[] Walls;
 
     /// <summary>
-    /// Префабы для спавна
+    /// РџСЂРµС„Р°Р±С‹ РґР»СЏ СЃРїР°РІРЅР°
     /// </summary>
     [Header("SpawnSettings")]
     public SpawnItem[] Blocks;
 
     /// <summary>
-    /// Префабы для бонусов
+    /// РџСЂРµС„Р°Р±С‹ РґР»СЏ Р±РѕРЅСѓСЃРѕРІ
     /// </summary>
     public BonusItem[] Bonuses;
     /// <summary>
-    /// Количество бонусов
+    /// РљРѕР»РёС‡РµСЃС‚РІРѕ Р±РѕРЅСѓСЃРѕРІ
     /// </summary>
     public int bonusCount = 0;
 
     /// <summary>
-    /// Случайный спавн или вручную заданный
+    /// РЎР»СѓС‡Р°Р№РЅС‹Р№ СЃРїР°РІРЅ РёР»Рё РІСЂСѓС‡РЅСѓСЋ Р·Р°РґР°РЅРЅС‹Р№
     /// </summary>
     public bool randomSpawn;
 
     /// <summary>
-    /// Настройка ячеек спавна для не рандомного старта
+    /// РќР°СЃС‚СЂРѕР№РєР° СЏС‡РµРµРє СЃРїР°РІРЅР° РґР»СЏ РЅРµ СЂР°РЅРґРѕРјРЅРѕРіРѕ СЃС‚Р°СЂС‚Р°
     /// </summary>
     public List<CellRow> spawnCells = new List<CellRow>();
     /// <summary>
-    /// С какого уровня начать
+    /// РЎ РєР°РєРѕРіРѕ СѓСЂРѕРІРЅСЏ РЅР°С‡Р°С‚СЊ
     /// </summary>
     public int currentSpawnCellIndex = 0;
     /// <summary>
-    /// Менять ли уровни автоматически после прохождения
+    /// РњРµРЅСЏС‚СЊ Р»Рё СѓСЂРѕРІРЅРё Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїРѕСЃР»Рµ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ
     /// </summary>
     public bool isAutoIncrementSpawnIndex = false;
 
     [Header("Audio")]
 
     /// <summary>
-    /// Объект воспроизведения звука успеха.
+    /// РћР±СЉРµРєС‚ РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёСЏ Р·РІСѓРєР° СѓСЃРїРµС…Р°.
     /// </summary>
     public AudioSource successAudioSource;
 
     /// <summary>
-    /// Объект воспроизведения звука неудачи.
+    /// РћР±СЉРµРєС‚ РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёСЏ Р·РІСѓРєР° РЅРµСѓРґР°С‡Рё.
     /// </summary>
     public AudioSource failureAudioSource;
 
     /// <summary>
-    /// Объект воспроизведения звука бонусов.
+    /// РћР±СЉРµРєС‚ РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёСЏ Р·РІСѓРєР° Р±РѕРЅСѓСЃРѕРІ.
     /// </summary>
     public AudioSource bonusAudioSource;
 
@@ -117,26 +117,26 @@ public class MazeSpawner : MonoBehaviour
     #region PrivateSection
 
     /// <summary>
-    /// Количество строк
+    /// РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє
     /// </summary>
     private int rows;
     /// <summary>
-    /// Количество столбцов
+    /// РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ
     /// </summary>
     private int columns;
 
     /// <summary>
-    /// Количество объектов для спавна
+    /// РљРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЉРµРєС‚РѕРІ РґР»СЏ СЃРїР°РІРЅР°
     /// </summary>
     private int spawnCount;
 
     /// <summary>
-    /// Кеш выхода
+    /// РљРµС€ РІС‹С…РѕРґР°
     /// </summary>
     private Cell ExitCache;
 
     /// <summary>
-    /// Словарь с типом выхода и его поворотом
+    /// РЎР»РѕРІР°СЂСЊ СЃ С‚РёРїРѕРј РІС‹С…РѕРґР° Рё РµРіРѕ РїРѕРІРѕСЂРѕС‚РѕРј
     /// </summary>
     private SortedDictionary<ExitRotationType, int> rotationExitVariant
         = new SortedDictionary<ExitRotationType, int>()
@@ -146,42 +146,42 @@ public class MazeSpawner : MonoBehaviour
         };
 
     /// <summary>
-    /// Текущий счёт
+    /// РўРµРєСѓС‰РёР№ СЃС‡С‘С‚
     /// </summary>
     private int currentScore = 0;
     /// <summary>
-    /// Не собранные объекты
+    /// РќРµ СЃРѕР±СЂР°РЅРЅС‹Рµ РѕР±СЉРµРєС‚С‹
     /// </summary>
     private int notCollectedScore = 0;
     /// <summary>
-    /// Собранные объекты
+    /// РЎРѕР±СЂР°РЅРЅС‹Рµ РѕР±СЉРµРєС‚С‹
     /// </summary>
     private int collectedScore = 0;
     /// <summary>
-    /// Стартовая позиция лабиринта
+    /// РЎС‚Р°СЂС‚РѕРІР°СЏ РїРѕР·РёС†РёСЏ Р»Р°Р±РёСЂРёРЅС‚Р°
     /// </summary>
     private Tuple<int, int> startPositionLabyrinth;
     /// <summary>
-    /// Словарь для запоминанию движения по ячейкам
+    /// РЎР»РѕРІР°СЂСЊ РґР»СЏ Р·Р°РїРѕРјРёРЅР°РЅРёСЋ РґРІРёР¶РµРЅРёСЏ РїРѕ СЏС‡РµР№РєР°Рј
     /// </summary>
     private Dictionary<Vector2Int, ExitRotationType> cellDirections = new Dictionary<Vector2Int, ExitRotationType>();
     /// <summary>
-    /// Включен ли звук
+    /// Р’РєР»СЋС‡РµРЅ Р»Рё Р·РІСѓРє
     /// </summary>
     private bool isSoundOn = true;
     /// <summary>
-    /// Время раунда
+    /// Р’СЂРµРјСЏ СЂР°СѓРЅРґР°
     /// </summary>
     private float roundTime;
     /// <summary>
-    /// Изменён ли таймер первый раз?
+    /// РР·РјРµРЅС‘РЅ Р»Рё С‚Р°Р№РјРµСЂ РїРµСЂРІС‹Р№ СЂР°Р·?
     /// </summary>
     private bool firstTimeTimerSecondChange = false;
 
     bool[,] maze;
 
     /// <summary>
-    /// Словарь для сложностей
+    /// РЎР»РѕРІР°СЂСЊ РґР»СЏ СЃР»РѕР¶РЅРѕСЃС‚РµР№
     /// </summary>
     Dictionary<DifficultType, DifficultStruct> difficultyDictionary = new Dictionary<DifficultType, DifficultStruct>();
     #endregion
@@ -200,21 +200,21 @@ public class MazeSpawner : MonoBehaviour
     #region PublicFunc
 
     /// <summary>
-    /// Основная функция спавна лабиринта, персонажа, выхода и объектов в лабиринте
+    /// РћСЃРЅРѕРІРЅР°СЏ С„СѓРЅРєС†РёСЏ СЃРїР°РІРЅР° Р»Р°Р±РёСЂРёРЅС‚Р°, РїРµСЂСЃРѕРЅР°Р¶Р°, РІС‹С…РѕРґР° Рё РѕР±СЉРµРєС‚РѕРІ РІ Р»Р°Р±РёСЂРёРЅС‚Рµ
     /// </summary>
     public void SpawnGrid()
     {
         roundTime = difficultyDictionary[Difficult].secondTimer;
 
-        //Очистка уровня
+        //РћС‡РёСЃС‚РєР° СѓСЂРѕРІРЅСЏ
         DeleteAllObjectsWithTag("LabBlock");
         DeleteAllBonusesFromScene();
 
-        // Расчет размера ячейки
+        // Р Р°СЃС‡РµС‚ СЂР°Р·РјРµСЂР° СЏС‡РµР№РєРё
         float cellWidth = (bottomRight.x - topLeft.x) / columns;
         float cellHeight = (topLeft.z - bottomRight.z) / rows;
 
-        // Заполнение списка случайными ячейками, если нужно
+        // Р—Р°РїРѕР»РЅРµРЅРёРµ СЃРїРёСЃРєР° СЃР»СѓС‡Р°Р№РЅС‹РјРё СЏС‡РµР№РєР°РјРё, РµСЃР»Рё РЅСѓР¶РЅРѕ
         if (randomSpawn)
         {
             GenerateMaze();
@@ -235,12 +235,12 @@ public class MazeSpawner : MonoBehaviour
                 SpawnBlock(cellWidth, cellHeight, cell.indexCell.x, cell.indexCell.y);
         }
 
-        // Вызываем событие, если на него есть подписчики
+        // Р’С‹Р·С‹РІР°РµРј СЃРѕР±С‹С‚РёРµ, РµСЃР»Рё РЅР° РЅРµРіРѕ РµСЃС‚СЊ РїРѕРґРїРёСЃС‡РёРєРё
         OnRestartCompleted?.Invoke();
     }
 
     /// <summary>
-    /// Вызывается при достижении выхода
+    /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РґРѕСЃС‚РёР¶РµРЅРёРё РІС‹С…РѕРґР°
     /// </summary>
     public void StartLevelRestart()
     {
@@ -254,7 +254,7 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Вызывается для перестройки лабиринта
+    /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ РґР»СЏ РїРµСЂРµСЃС‚СЂРѕР№РєРё Р»Р°Р±РёСЂРёРЅС‚Р°
     /// </summary>
     public void CompleteLevelRestart()
     {
@@ -270,20 +270,20 @@ public class MazeSpawner : MonoBehaviour
     #region PrivateFunc
 
     /// <summary>
-    /// События для смены статуса звука
+    /// РЎРѕР±С‹С‚РёСЏ РґР»СЏ СЃРјРµРЅС‹ СЃС‚Р°С‚СѓСЃР° Р·РІСѓРєР°
     /// </summary>
-    /// <param name="arg1">Тот, кто вызвал событие</param>
-    /// <param name="soundOn">Статус звука</param>
+    /// <param name="arg1">РўРѕС‚, РєС‚Рѕ РІС‹Р·РІР°Р» СЃРѕР±С‹С‚РёРµ</param>
+    /// <param name="soundOn">РЎС‚Р°С‚СѓСЃ Р·РІСѓРєР°</param>
     private void OnSoundsStatusChanged(object arg1, bool soundOn)
     {
         isSoundOn = soundOn;
     }
 
     /// <summary>
-    /// Событие смены сложности
+    /// РЎРѕР±С‹С‚РёРµ СЃРјРµРЅС‹ СЃР»РѕР¶РЅРѕСЃС‚Рё
     /// </summary>
-    /// <param name="arg1">Тот, кто вызвал событие</param>
-    /// <param name="difficulty">Сложность</param>
+    /// <param name="arg1">РўРѕС‚, РєС‚Рѕ РІС‹Р·РІР°Р» СЃРѕР±С‹С‚РёРµ</param>
+    /// <param name="difficulty">РЎР»РѕР¶РЅРѕСЃС‚СЊ</param>
     private void OnDifficultyChange(object arg1, int difficulty)
     {
         Difficult = (DifficultType)difficulty;
@@ -291,10 +291,10 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Событие смены времени таймера
+    /// РЎРѕР±С‹С‚РёРµ СЃРјРµРЅС‹ РІСЂРµРјРµРЅРё С‚Р°Р№РјРµСЂР°
     /// </summary>
-    /// <param name="arg1">Тот, кто вызвал событие</param>
-    /// <param name="seconds">Время, которое установлено</param>
+    /// <param name="arg1">РўРѕС‚, РєС‚Рѕ РІС‹Р·РІР°Р» СЃРѕР±С‹С‚РёРµ</param>
+    /// <param name="seconds">Р’СЂРµРјСЏ, РєРѕС‚РѕСЂРѕРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРѕ</param>
     private void OnDifficultyTimerSecondChange(object arg1, float seconds)
     {
         var cachedDifficult = difficultyDictionary[Difficult];
@@ -308,9 +308,9 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Устанавливает игровые параметры у определённой сложности
+    /// РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РёРіСЂРѕРІС‹Рµ РїР°СЂР°РјРµС‚СЂС‹ Сѓ РѕРїСЂРµРґРµР»С‘РЅРЅРѕР№ СЃР»РѕР¶РЅРѕСЃС‚Рё
     /// </summary>
-    /// <param name="difficult">Сложность, которую необходимо установить</param>
+    /// <param name="difficult">РЎР»РѕР¶РЅРѕСЃС‚СЊ, РєРѕС‚РѕСЂСѓСЋ РЅРµРѕР±С…РѕРґРёРјРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ</param>
     private void SetDifficulty(DifficultType difficult)
     {
         for (int i = 0; i < Blocks.Length; i++)
@@ -320,7 +320,7 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Применяет настройки сложности для дальнейшего использования
+    /// РџСЂРёРјРµРЅСЏРµС‚ РЅР°СЃС‚СЂРѕР№РєРё СЃР»РѕР¶РЅРѕСЃС‚Рё РґР»СЏ РґР°Р»СЊРЅРµР№С€РµРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ
     /// </summary>
     private void FirstTimeApplyDifficulty()
     {
@@ -330,7 +330,7 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Генерирует лабиринт, исходя из заданного размера в скрипте
+    /// Р“РµРЅРµСЂРёСЂСѓРµС‚ Р»Р°Р±РёСЂРёРЅС‚, РёСЃС…РѕРґСЏ РёР· Р·Р°РґР°РЅРЅРѕРіРѕ СЂР°Р·РјРµСЂР° РІ СЃРєСЂРёРїС‚Рµ
     /// </summary>
     private void GenerateMaze()
     {
@@ -369,9 +369,9 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Генерирует расположение бонусов, исходя из заданного количества в скрипте
+    /// Р“РµРЅРµСЂРёСЂСѓРµС‚ СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ Р±РѕРЅСѓСЃРѕРІ, РёСЃС…РѕРґСЏ РёР· Р·Р°РґР°РЅРЅРѕРіРѕ РєРѕР»РёС‡РµСЃС‚РІР° РІ СЃРєСЂРёРїС‚Рµ
     /// </summary>
-    /// <param name="maze">Массив лабиринта</param>
+    /// <param name="maze">РњР°СЃСЃРёРІ Р»Р°Р±РёСЂРёРЅС‚Р°</param>
     /// <param name="i"></param>
     /// <param name="j"></param>
     private void GenerateBonusesForMaze(bool[,] maze, out int i, out int j)
@@ -405,10 +405,10 @@ public class MazeSpawner : MonoBehaviour
         {
             for (int y = 0; y < maze.GetLength(1); y++)
             {
-                // Текущая ячейка является стеной или пустым пространством.
+                // РўРµРєСѓС‰Р°СЏ СЏС‡РµР№РєР° СЏРІР»СЏРµС‚СЃСЏ СЃС‚РµРЅРѕР№ РёР»Рё РїСѓСЃС‚С‹Рј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕРј.
                 bool isVoid = maze[x, y];
 
-                // Если текущая ячейка не стена, проверяем все возможные направления
+                // Р•СЃР»Рё С‚РµРєСѓС‰Р°СЏ СЏС‡РµР№РєР° РЅРµ СЃС‚РµРЅР°, РїСЂРѕРІРµСЂСЏРµРј РІСЃРµ РІРѕР·РјРѕР¶РЅС‹Рµ РЅР°РїСЂР°РІР»РµРЅРёСЏ
                 if (isVoid)
                 {
                     CloseExitIfNecessary(x, y, maze);
@@ -428,26 +428,26 @@ public class MazeSpawner : MonoBehaviour
     };
         Vector3[] rotationOffsets = new Vector3[]
         {
-    new Vector3(0, 0, 0), // Север
-    new Vector3(0, 0, 0),  // Юг
-    new Vector3(0, 90, 0), // Запад
-    new Vector3(0, 90, 0)   // Восток
+    new Vector3(0, 0, 0), // РЎРµРІРµСЂ
+    new Vector3(0, 0, 0),  // Р®Рі
+    new Vector3(0, 90, 0), // Р—Р°РїР°Рґ
+    new Vector3(0, 90, 0)   // Р’РѕСЃС‚РѕРє
         };
         Tuple<int, int>[] directions = new Tuple<int, int>[]
         {
-    new Tuple<int, int>(x - 1, y), // Север
-    new Tuple<int, int>(x + 1, y), // Юг
-    new Tuple<int, int>(x, y - 1), // Запад
-    new Tuple<int, int>(x, y + 1)  // Восток
+    new Tuple<int, int>(x - 1, y), // РЎРµРІРµСЂ
+    new Tuple<int, int>(x + 1, y), // Р®Рі
+    new Tuple<int, int>(x, y - 1), // Р—Р°РїР°Рґ
+    new Tuple<int, int>(x, y + 1)  // Р’РѕСЃС‚РѕРє
         };
 
         for (int i = 0; i < directions.Length; i++)
         {
             var dir = directions[i];
-            // Если направление находится в пределах лабиринта и является стеной
+            // Р•СЃР»Рё РЅР°РїСЂР°РІР»РµРЅРёРµ РЅР°С…РѕРґРёС‚СЃСЏ РІ РїСЂРµРґРµР»Р°С… Р»Р°Р±РёСЂРёРЅС‚Р° Рё СЏРІР»СЏРµС‚СЃСЏ СЃС‚РµРЅРѕР№
             if (dir.Item1 >= 0 && dir.Item1 < maze.GetLength(0) && dir.Item2 >= 0 && dir.Item2 < maze.GetLength(1) && !maze[dir.Item1, dir.Item2])
             {
-                // Закрытие прохода в направлении стены
+                // Р—Р°РєСЂС‹С‚РёРµ РїСЂРѕС…РѕРґР° РІ РЅР°РїСЂР°РІР»РµРЅРёРё СЃС‚РµРЅС‹
                 SpawnWallAt(x, y, directionOffsets[i], rotationOffsets[i]);
             }
         }
@@ -464,7 +464,7 @@ public class MazeSpawner : MonoBehaviour
             GameObject spawnedWall = Instantiate(wallItem.Object, spawnPosition, Quaternion.identity, transform);
             spawnedWall.transform.localScale = wallItem.scale;
 
-            // Поворот стены, если требуется
+            // РџРѕРІРѕСЂРѕС‚ СЃС‚РµРЅС‹, РµСЃР»Рё С‚СЂРµР±СѓРµС‚СЃСЏ
             spawnedWall.transform.rotation = Quaternion.Euler(rotationOffsets.x, rotationOffsets.y, rotationOffsets.z);
         }
     }
@@ -479,10 +479,10 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Ищет самую дальнюю точку от персонажа в лабиринте
+    /// РС‰РµС‚ СЃР°РјСѓСЋ РґР°Р»СЊРЅСЋСЋ С‚РѕС‡РєСѓ РѕС‚ РїРµСЂСЃРѕРЅР°Р¶Р° РІ Р»Р°Р±РёСЂРёРЅС‚Рµ
     /// </summary>
-    /// <param name="maze">Лабиринт</param>
-    /// <param name="start">Точка, в которой расположен персонаж</param>
+    /// <param name="maze">Р›Р°Р±РёСЂРёРЅС‚</param>
+    /// <param name="start">РўРѕС‡РєР°, РІ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅ РїРµСЂСЃРѕРЅР°Р¶</param>
     /// <returns></returns>
     Tuple<int, int> FindFurthestCell(bool[,] maze, Tuple<int, int> start)
     {
@@ -499,7 +499,7 @@ public class MazeSpawner : MonoBehaviour
         {
             current = queue.Dequeue();
 
-            // Проверяем соседей
+            // РџСЂРѕРІРµСЂСЏРµРј СЃРѕСЃРµРґРµР№
             List<Tuple<int, int>> neighbors = GetNeighbors(current, height, width);
             foreach (Tuple<int, int> neighbor in neighbors)
             {
@@ -515,35 +515,35 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Получение соседней ячейки
+    /// РџРѕР»СѓС‡РµРЅРёРµ СЃРѕСЃРµРґРЅРµР№ СЏС‡РµР№РєРё
     /// </summary>
-    /// <param name="cell">Ячейка</param>
-    /// <param name="height">Высота ячейки</param>
-    /// <param name="width">Длинна ячейки</param>
+    /// <param name="cell">РЇС‡РµР№РєР°</param>
+    /// <param name="height">Р’С‹СЃРѕС‚Р° СЏС‡РµР№РєРё</param>
+    /// <param name="width">Р”Р»РёРЅРЅР° СЏС‡РµР№РєРё</param>
     /// <returns></returns>
     List<Tuple<int, int>> GetNeighbors(Tuple<int, int> cell, int height, int width)
     {
         List<Tuple<int, int>> neighbors = new List<Tuple<int, int>>();
 
-        // Север
+        // РЎРµРІРµСЂ
         if (cell.Item1 > 0)
         {
             neighbors.Add(new Tuple<int, int>(cell.Item1 - 1, cell.Item2));
             cellDirections[new Vector2Int(cell.Item1 - 1, cell.Item2)] = ExitRotationType.Top;
         }
-        // Юг
+        // Р®Рі
         if (cell.Item1 < height - 1)
         {
             neighbors.Add(new Tuple<int, int>(cell.Item1 + 1, cell.Item2));
             cellDirections[new Vector2Int(cell.Item1 + 1, cell.Item2)] = ExitRotationType.Top;
         }
-        // Запад
+        // Р—Р°РїР°Рґ
         if (cell.Item2 > 0)
         {
             neighbors.Add(new Tuple<int, int>(cell.Item1, cell.Item2 - 1));
             cellDirections[new Vector2Int(cell.Item1, cell.Item2 - 1)] = ExitRotationType.Right;
         }
-        // Восток
+        // Р’РѕСЃС‚РѕРє
         if (cell.Item2 < width - 1)
         {
             neighbors.Add(new Tuple<int, int>(cell.Item1, cell.Item2 + 1));
@@ -554,10 +554,10 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Генерация самого лабиринте
+    /// Р“РµРЅРµСЂР°С†РёСЏ СЃР°РјРѕРіРѕ Р»Р°Р±РёСЂРёРЅС‚Рµ
     /// </summary>
-    /// <param name="width">Длинна лабиринта</param>
-    /// <param name="height">Высота лабиринта</param>
+    /// <param name="width">Р”Р»РёРЅРЅР° Р»Р°Р±РёСЂРёРЅС‚Р°</param>
+    /// <param name="height">Р’С‹СЃРѕС‚Р° Р»Р°Р±РёСЂРёРЅС‚Р°</param>
     /// <returns></returns>
     private bool[,] GenerateMaze(int width, int height)
     {
@@ -577,16 +577,16 @@ public class MazeSpawner : MonoBehaviour
             Tuple<int, int> v = stack.Peek();
             List<Tuple<int, int>> neighbors = new List<Tuple<int, int>>();
 
-            // Север
+            // РЎРµРІРµСЂ
             if (v.Item1 > 1 && maze[v.Item1 - 2, v.Item2])
                 neighbors.Add(new Tuple<int, int>(v.Item1 - 2, v.Item2));
-            // Юг
+            // Р®Рі
             if (v.Item1 < height - 2 && maze[v.Item1 + 2, v.Item2])
                 neighbors.Add(new Tuple<int, int>(v.Item1 + 2, v.Item2));
-            // Запад
+            // Р—Р°РїР°Рґ
             if (v.Item2 > 1 && maze[v.Item1, v.Item2 - 2])
                 neighbors.Add(new Tuple<int, int>(v.Item1, v.Item2 - 2));
-            // Восток
+            // Р’РѕСЃС‚РѕРє
             if (v.Item2 < width - 2 && maze[v.Item1, v.Item2 + 2])
                 neighbors.Add(new Tuple<int, int>(v.Item1, v.Item2 + 2));
 
@@ -597,7 +597,7 @@ public class MazeSpawner : MonoBehaviour
                 int randIndex = rand.Next(neighbors.Count);
                 Tuple<int, int> w = neighbors[randIndex];
 
-                // Удаляем стену
+                // РЈРґР°Р»СЏРµРј СЃС‚РµРЅСѓ
                 if (w.Item1 > v.Item1)
                     maze[v.Item1 + 1, v.Item2] = false;
                 else if (w.Item1 < v.Item1)
@@ -620,15 +620,15 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Располагает бонусы на уровне
+    /// Р Р°СЃРїРѕР»Р°РіР°РµС‚ Р±РѕРЅСѓСЃС‹ РЅР° СѓСЂРѕРІРЅРµ
     /// </summary>
-    /// <param name="cellWidth">Длинна ячейки</param>
-    /// <param name="cellHeight">Высота ячейки</param>
-    /// <param name="cell">Сама структура ячейки</param>
+    /// <param name="cellWidth">Р”Р»РёРЅРЅР° СЏС‡РµР№РєРё</param>
+    /// <param name="cellHeight">Р’С‹СЃРѕС‚Р° СЏС‡РµР№РєРё</param>
+    /// <param name="cell">РЎР°РјР° СЃС‚СЂСѓРєС‚СѓСЂР° СЏС‡РµР№РєРё</param>
     /// <returns></returns>
     private Cell SpawnBonuses(float cellWidth, float cellHeight, Cell cell)
     {
-        // Выбираем случайный префаб для спавна
+        // Р’С‹Р±РёСЂР°РµРј СЃР»СѓС‡Р°Р№РЅС‹Р№ РїСЂРµС„Р°Р± РґР»СЏ СЃРїР°РІРЅР°
         BonusItem Item = Bonuses[UnityEngine.Random.Range(0, Bonuses.Length)];
         GameObject curBonus = Item.Object;
         switch (Item.Type)
@@ -638,24 +638,24 @@ public class MazeSpawner : MonoBehaviour
             case BonusType.ThreePoint: break;
         }
 
-        // Позиция для спавна
+        // РџРѕР·РёС†РёСЏ РґР»СЏ СЃРїР°РІРЅР°
         Vector3 spawnPosition = new Vector3(topLeft.x + Item.locationOffset.x + cell.indexCell.y * cellWidth + cellWidth / 2,
                                             topLeft.y + Item.locationOffset.y,
                                             topLeft.z + Item.locationOffset.z - cell.indexCell.x * cellHeight - cellHeight / 2);
-        // Спавн объекта
+        // РЎРїР°РІРЅ РѕР±СЉРµРєС‚Р°
         GameObject spawnedObject =
             Instantiate(curBonus, spawnPosition, Quaternion.identity);
         spawnedObject.transform.localScale =
             new Vector3(Item.scale.x, Item.scale.y, Item.scale.z);
 
-        spawnedObject.tag = Item.Type.ToString();  // Назначение тега объекту
+        spawnedObject.tag = Item.Type.ToString();  // РќР°Р·РЅР°С‡РµРЅРёРµ С‚РµРіР° РѕР±СЉРµРєС‚Сѓ
         return cell;
     }
 
 
 
     /// <summary>
-    /// Удаление всех бонусов с уровня. Необходима, так как у бонусов разные теги.
+    /// РЈРґР°Р»РµРЅРёРµ РІСЃРµС… Р±РѕРЅСѓСЃРѕРІ СЃ СѓСЂРѕРІРЅСЏ. РќРµРѕР±С…РѕРґРёРјР°, С‚Р°Рє РєР°Рє Сѓ Р±РѕРЅСѓСЃРѕРІ СЂР°Р·РЅС‹Рµ С‚РµРіРё.
     /// </summary>
     private static void DeleteAllBonusesFromScene()
     {
@@ -679,7 +679,7 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Очищает пространство перед выходом
+    /// РћС‡РёС‰Р°РµС‚ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РїРµСЂРµРґ РІС‹С…РѕРґРѕРј
     /// </summary>
     private void ClearCellsNearExit()
     {
@@ -705,9 +705,9 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Удаляет блоки с определённым тегом
+    /// РЈРґР°Р»СЏРµС‚ Р±Р»РѕРєРё СЃ РѕРїСЂРµРґРµР»С‘РЅРЅС‹Рј С‚РµРіРѕРј
     /// </summary>
-    /// <param name="tag">Тег для поиска блоков для удаления</param>
+    /// <param name="tag">РўРµРі РґР»СЏ РїРѕРёСЃРєР° Р±Р»РѕРєРѕРІ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ</param>
     private void DeleteAllObjectsWithTag(string tag)
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
@@ -719,7 +719,7 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Может использоваться вместо генерации лабиринта. Просто рандомно размещает блоки в рандомные ячейки.
+    /// РњРѕР¶РµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ РІРјРµСЃС‚Рѕ РіРµРЅРµСЂР°С†РёРё Р»Р°Р±РёСЂРёРЅС‚Р°. РџСЂРѕСЃС‚Рѕ СЂР°РЅРґРѕРјРЅРѕ СЂР°Р·РјРµС‰Р°РµС‚ Р±Р»РѕРєРё РІ СЂР°РЅРґРѕРјРЅС‹Рµ СЏС‡РµР№РєРё.
     /// </summary>
     private void SpawnNewRandomCells()
     {
@@ -735,7 +735,7 @@ public class MazeSpawner : MonoBehaviour
                     );
                 randomCell.cellType = LabyrinthObjectType.Empty;
             }
-            while (spawnCells[currentSpawnCellIndex].row.Contains(randomCell)); // Проверяем, чтобы не спавнить два объекта в одной ячейке
+            while (spawnCells[currentSpawnCellIndex].row.Contains(randomCell)); // РџСЂРѕРІРµСЂСЏРµРј, С‡С‚РѕР±С‹ РЅРµ СЃРїР°РІРЅРёС‚СЊ РґРІР° РѕР±СЉРµРєС‚Р° РІ РѕРґРЅРѕР№ СЏС‡РµР№РєРµ
 
             randomCell.cellType = LabyrinthObjectType.Empty;
             if (i == spawnCount - 1)
@@ -757,14 +757,14 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Изменяет положение, размер выхода
+    /// РР·РјРµРЅСЏРµС‚ РїРѕР»РѕР¶РµРЅРёРµ, СЂР°Р·РјРµСЂ РІС‹С…РѕРґР°
     /// </summary>
-    /// <param name="cellWidth">Длинна ячейки</param>
-    /// <param name="cellHeight">Высота ячейки</param>
-    /// <param name="cell">Сама структура ячейки</param>
+    /// <param name="cellWidth">Р”Р»РёРЅРЅР° СЏС‡РµР№РєРё</param>
+    /// <param name="cellHeight">Р’С‹СЃРѕС‚Р° СЏС‡РµР№РєРё</param>
+    /// <param name="cell">РЎР°РјР° СЃС‚СЂСѓРєС‚СѓСЂР° СЏС‡РµР№РєРё</param>
     private void TransformExit(float cellWidth, float cellHeight, Cell cell)
     {
-        // Позиция для спавна
+        // РџРѕР·РёС†РёСЏ РґР»СЏ СЃРїР°РІРЅР°
         Vector3 spawnPosition = new Vector3(topLeft.x + cell.indexCell.y * cellWidth + cellWidth / 2,
                                             topLeft.y,
                                             topLeft.z - cell.indexCell.x * cellHeight - cellHeight / 2);
@@ -775,9 +775,9 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Поворачивает выход в определённое положение.
+    /// РџРѕРІРѕСЂР°С‡РёРІР°РµС‚ РІС‹С…РѕРґ РІ РѕРїСЂРµРґРµР»С‘РЅРЅРѕРµ РїРѕР»РѕР¶РµРЅРёРµ.
     /// </summary>
-    /// <param name="cell">Ячейка, в которой расположен выход</param>
+    /// <param name="cell">РЇС‡РµР№РєР°, РІ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅ РІС‹С…РѕРґ</param>
     private void RotateExitForCellLocation(Cell cell)
     {
         int currentRotation = 0;
@@ -797,14 +797,14 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Перемещает персонажа в нужную точку
+    /// РџРµСЂРµРјРµС‰Р°РµС‚ РїРµСЂСЃРѕРЅР°Р¶Р° РІ РЅСѓР¶РЅСѓСЋ С‚РѕС‡РєСѓ
     /// </summary>
-    /// <param name="cellWidth">Длинна ячейки</param>
-    /// <param name="cellHeight">Высота ячейки</param>
-    /// <param name="cell">Сама структура ячейки</param>
+    /// <param name="cellWidth">Р”Р»РёРЅРЅР° СЏС‡РµР№РєРё</param>
+    /// <param name="cellHeight">Р’С‹СЃРѕС‚Р° СЏС‡РµР№РєРё</param>
+    /// <param name="cell">РЎР°РјР° СЃС‚СЂСѓРєС‚СѓСЂР° СЏС‡РµР№РєРё</param>
     private void RelocateCharacter(float cellWidth, float cellHeight, Cell cell)
     {
-        // Позиция для спавна
+        // РџРѕР·РёС†РёСЏ РґР»СЏ СЃРїР°РІРЅР°
         Vector3 spawnPosition = new Vector3(topLeft.x + cell.indexCell.y * cellWidth + cellWidth / 2,
                                             topLeft.y,
                                             topLeft.z - cell.indexCell.x * cellHeight - cellHeight / 2);
@@ -813,29 +813,29 @@ public class MazeSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Располагает препятствия на карте
+    /// Р Р°СЃРїРѕР»Р°РіР°РµС‚ РїСЂРµРїСЏС‚СЃС‚РІРёСЏ РЅР° РєР°СЂС‚Рµ
     /// </summary>
-    /// <param name="cellWidth">Длинна ячейки</param>
-    /// <param name="cellHeight">Высота ячейки</param>
-    /// <param name="i">Индекс y</param>
-    /// <param name="j">Индекс по x</param>
+    /// <param name="cellWidth">Р”Р»РёРЅРЅР° СЏС‡РµР№РєРё</param>
+    /// <param name="cellHeight">Р’С‹СЃРѕС‚Р° СЏС‡РµР№РєРё</param>
+    /// <param name="i">РРЅРґРµРєСЃ y</param>
+    /// <param name="j">РРЅРґРµРєСЃ РїРѕ x</param>
     private void SpawnBlock(float cellWidth, float cellHeight, int i, int j)
     {
-        // Выбираем случайный префаб для спавна
+        // Р’С‹Р±РёСЂР°РµРј СЃР»СѓС‡Р°Р№РЅС‹Р№ РїСЂРµС„Р°Р± РґР»СЏ СЃРїР°РІРЅР°
         SpawnItem Item = Blocks[UnityEngine.Random.Range(0, Blocks.Length)];
         GameObject prefab = Item.Object;
 
-        // Позиция для спавна
+        // РџРѕР·РёС†РёСЏ РґР»СЏ СЃРїР°РІРЅР°
         Vector3 spawnPosition = new Vector3(topLeft.x + Item.locationOffset.x + j * cellWidth + cellWidth / 2,
                                             topLeft.y + Item.locationOffset.y,
                                             topLeft.z + Item.locationOffset.z - i * cellHeight - cellHeight / 2);
-        // Спавн объекта
+        // РЎРїР°РІРЅ РѕР±СЉРµРєС‚Р°
         GameObject spawnedObject =
             Instantiate(prefab, spawnPosition, Quaternion.identity);
         spawnedObject.transform.localScale =
             new Vector3(Item.scale.x, Item.scale.y, Item.scale.z);
 
-        spawnedObject.tag = "LabBlock";  // Назначение тега объекту
+        spawnedObject.tag = "LabBlock";  // РќР°Р·РЅР°С‡РµРЅРёРµ С‚РµРіР° РѕР±СЉРµРєС‚Сѓ
     }
 
     #endregion

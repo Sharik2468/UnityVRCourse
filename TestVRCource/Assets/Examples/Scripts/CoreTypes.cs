@@ -28,10 +28,10 @@ public class CoreTypes : MonoBehaviour
 
     public enum LabyrinthObjectType
     {
-        Empty, //Преграда
-        Start, //Расположение персонажа
-        Exit, //Расположение выхода
-        Bonus //Расположение бонуса
+        Empty, //РџСЂРµРіСЂР°РґР°
+        Start, //Р Р°СЃРїРѕР»РѕР¶РµРЅРёРµ РїРµСЂСЃРѕРЅР°Р¶Р°
+        Exit, //Р Р°СЃРїРѕР»РѕР¶РµРЅРёРµ РІС‹С…РѕРґР°
+        Bonus //Р Р°СЃРїРѕР»РѕР¶РµРЅРёРµ Р±РѕРЅСѓСЃР°
     }
     public enum BonusType
     {
@@ -53,7 +53,7 @@ public class CoreTypes : MonoBehaviour
     {
         public GameObject Object;
         public Vector3 locationOffset;
-        public Vector3 scale; //Нет необходимости модифицировать, так как модифицируется в настройках сложности
+        public Vector3 scale; //РќРµС‚ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РјРѕРґРёС„РёС†РёСЂРѕРІР°С‚СЊ, С‚Р°Рє РєР°Рє РјРѕРґРёС„РёС†РёСЂСѓРµС‚СЃСЏ РІ РЅР°СЃС‚СЂРѕР№РєР°С… СЃР»РѕР¶РЅРѕСЃС‚Рё
     }
 
     [Serializable]
