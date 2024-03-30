@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static CoreTypes;
+using static Valve.VR.SteamVR_Skybox;
 
 public class MazeSpawner : MonoBehaviour
 {
@@ -57,6 +58,9 @@ public class MazeSpawner : MonoBehaviour
     /// Настройка сложной сложности лабиринта
     /// </summary>
     public DifficultStruct hardDifficulty;
+
+    [Header("Wall Settings")]
+    public SpawnItem[] Walls;
 
     /// <summary>
     /// Префабы для спавна
@@ -173,6 +177,8 @@ public class MazeSpawner : MonoBehaviour
     /// Изменён ли таймер первый раз?
     /// </summary>
     private bool firstTimeTimerSecondChange = false;
+
+    bool[,] maze;
 
     /// <summary>
     /// Словарь для сложностей
@@ -330,7 +336,8 @@ public class MazeSpawner : MonoBehaviour
     {
         spawnCells[currentSpawnCellIndex].row.Clear();
 
-        bool[,] maze = GenerateMaze(rows, columns);
+        maze = GenerateMaze(rows, columns);
+        CloseAllUnnecessaryExits();
         spawnCells[currentSpawnCellIndex].row.Add
             (new Cell
             {
@@ -390,6 +397,85 @@ public class MazeSpawner : MonoBehaviour
             i = UnityEngine.Random.Range(0, rows);
             j = UnityEngine.Random.Range(0, columns);
         }
+    }
+
+    void CloseAllUnnecessaryExits()
+    {
+        for (int x = 0; x < maze.GetLength(0); x++)
+        {
+            for (int y = 0; y < maze.GetLength(1); y++)
+            {
+                // Текущая ячейка является стеной или пустым пространством.
+                bool isVoid = maze[x, y];
+
+                // Если текущая ячейка не стена, проверяем все возможные направления
+                if (isVoid)
+                {
+                    CloseExitIfNecessary(x, y, maze);
+                }
+            }
+        }
+    }
+
+    void CloseExitIfNecessary(int x, int y, bool[,] maze)
+    {
+        Vector3[] directionOffsets = new Vector3[]
+    {
+    new Vector3(0, 0, -0.5f),
+    new Vector3(0, 0, 0.5f),
+    new Vector3(-0.5f, 0, 0),
+    new Vector3(0.5f, 0, 0),
+    };
+        Vector3[] rotationOffsets = new Vector3[]
+        {
+    new Vector3(0, 0, 0), // Север
+    new Vector3(0, 0, 0),  // Юг
+    new Vector3(0, 90, 0), // Запад
+    new Vector3(0, 90, 0)   // Восток
+        };
+        Tuple<int, int>[] directions = new Tuple<int, int>[]
+        {
+    new Tuple<int, int>(x - 1, y), // Север
+    new Tuple<int, int>(x + 1, y), // Юг
+    new Tuple<int, int>(x, y - 1), // Запад
+    new Tuple<int, int>(x, y + 1)  // Восток
+        };
+
+        for (int i = 0; i < directions.Length; i++)
+        {
+            var dir = directions[i];
+            // Если направление находится в пределах лабиринта и является стеной
+            if (dir.Item1 >= 0 && dir.Item1 < maze.GetLength(0) && dir.Item2 >= 0 && dir.Item2 < maze.GetLength(1) && !maze[dir.Item1, dir.Item2])
+            {
+                // Закрытие прохода в направлении стены
+                SpawnWallAt(x, y, directionOffsets[i], rotationOffsets[i]);
+            }
+        }
+    }
+
+
+    private void SpawnWallAt(int x, int y, Vector3 directionOffset, Vector3 rotationOffsets)
+    {
+        if (Walls.Length > 0)
+        {
+            SpawnItem wallItem = Walls[UnityEngine.Random.Range(0, Walls.Length)];
+            Vector3 spawnPosition = CalculateWallPosition(x, y, directionOffset);
+
+            GameObject spawnedWall = Instantiate(wallItem.Object, spawnPosition, Quaternion.identity, transform);
+            spawnedWall.transform.localScale = wallItem.scale;
+
+            // Поворот стены, если требуется
+            spawnedWall.transform.rotation = Quaternion.Euler(rotationOffsets.x, rotationOffsets.y, rotationOffsets.z);
+        }
+    }
+
+
+    private Vector3 CalculateWallPosition(int x, int y, Vector3 directionOffset)
+    {
+        float cellWidth = (bottomRight.x - topLeft.x) / columns;
+        float cellHeight = (topLeft.z - bottomRight.z) / rows;
+        Vector3 position = new Vector3(topLeft.x + (y + 0.5f + directionOffset.x) * cellWidth, 0, topLeft.z - (x + 0.5f + directionOffset.z) * cellHeight);
+        return position;
     }
 
     /// <summary>
